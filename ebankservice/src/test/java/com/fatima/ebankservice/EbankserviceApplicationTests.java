@@ -1,13 +1,15 @@
 package com.fatima.ebankservice;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootTest
+@SpringBootApplication
+@EnableFeignClients
+
 class EbankserviceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+ public static void main(String[] args) {
+        SpringApplication.run(EbankserviceApplication.class, args);
+    }
 }
