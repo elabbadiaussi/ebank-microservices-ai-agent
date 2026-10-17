@@ -1,0 +1,31 @@
+
+package main.java.com.Fatima.ebank_bot.discord;
+
+import com.yassine.ebankbot.agents.EbankAIAgent;
+import com.zgamelogic.discord.annotations.DiscordController;
+import com.zgamelogic.discord.annotations.DiscordMapping;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
+@DiscordController
+public class DiscordBot {
+
+    private final EbankAIAgent ebankAIAgent;
+
+    public DiscordBot(EbankAIAgent ebankAIAgent) {
+        this.ebankAIAgent = ebankAIAgent;
+    }
+
+    @DiscordMapping
+    private void perform(MessageReceivedEvent event) {
+        if (event.getAuthor().isBot()) {
+            return;
+        }
+
+        String query = event.getMessage().getContentRaw();
+        String conversationId = event.getChannel().getId();
+
+        String response = ebankAIAgent.chat(query, conversationId);
+
+        event.getChannel().sendMessage(response).queue();
+    }
+}
